@@ -6,7 +6,7 @@ export function Hero() {
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Hi, I am <span className="text-primary">Ivanvolt</span>
+            Hi, I am <span className="text-primary">Benson</span>
           </h1>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
             I'm a backend engineer focusing on server-side architecture, performance optimization, and reliability. 
