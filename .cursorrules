@@ -1,0 +1,10 @@
+# Cursor AI Configuration
+
+## Language Preference
+Always respond in Chinese (Simplified Chinese) unless the user explicitly requests another language.
+
+## Communication Style
+- Use clear and professional Chinese
+- Provide code comments in Chinese when helpful
+- Explain technical concepts in Chinese
+
