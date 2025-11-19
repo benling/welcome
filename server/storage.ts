@@ -7,6 +7,8 @@ export interface IStorage {
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
   subscribeNewsletter(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
   getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
+  getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
+  getNewsletterSubscribersCount(): Promise<number>;
 }
 
 export class MemStorage implements IStorage {
@@ -26,7 +28,7 @@ export class MemStorage implements IStorage {
         description: "Aluo AI welcomes its biggest update ever: online editor supports multi-element operations, AI Assistant generates images through conversation, background removal precision enhanced, and product image generation speed increased 3x.",
         category: "Product",
         date: "2025/11/10",
-        imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "aluo-ai-update",
       },
       {
@@ -34,7 +36,7 @@ export class MemStorage implements IStorage {
         description: "A complete walkthrough of creating a Twitter Bot for automated posting, from developer account setup to API integration.",
         category: "Development",
         date: "2025/10/20",
-        imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "twitter-bot-automation",
       },
       {
@@ -42,7 +44,7 @@ export class MemStorage implements IStorage {
         description: "Set up a Gost SOCKS5 proxy with Docker in minutes and publish a Clash subscription via Nginx.",
         category: "Development",
         date: "2025/09/30",
-        imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "socks5",
       },
       {
@@ -50,7 +52,7 @@ export class MemStorage implements IStorage {
         description: "Detailed comparison of popular registration states like Delaware, Wyoming, and Colorado, helping cross-border entrepreneurs make rational choices for the best incorporation location.",
         category: "Experience",
         date: "2025/09/25",
-        imageUrl: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "us-state-selection",
       },
       {
@@ -58,7 +60,7 @@ export class MemStorage implements IStorage {
         description: "From Stripe payment requirements to US company registration - sharing the complete experience and comparing three registration methods to help cross-border entrepreneurs avoid pitfalls.",
         category: "Experience",
         date: "2025/09/24",
-        imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "overseas-company",
       },
       {
@@ -66,7 +68,7 @@ export class MemStorage implements IStorage {
         description: "A complete guide on setting up your own Plausible Analytics instance, including server deployment, HTTPS configuration, Nginx reverse proxy setup, and website integration.",
         category: "Development",
         date: "2025/04/23",
-        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "plausible",
       },
       {
@@ -74,7 +76,7 @@ export class MemStorage implements IStorage {
         description: "Today, I want to share a story about website optimization and a milestone summary of my journey after 2+ months of going global.",
         category: "SEO",
         date: "2025/03/09",
-        imageUrl: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "lesson",
       },
       {
@@ -82,7 +84,7 @@ export class MemStorage implements IStorage {
         description: "Stripe is a leading global online payment processing platform that provides infrastructure for businesses and individuals to receive online payments. As a domestic developer, most would choose Stripe to integrate payments into their websites, and applying for Stripe requires owning an overseas company.",
         category: "Experience",
         date: "2025/01/06",
-        imageUrl: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop",
+        imageUrl: "/under-construction.svg",
         slug: "us-company",
       },
     ];
@@ -128,6 +130,16 @@ export class MemStorage implements IStorage {
     return Array.from(this.newsletterSubscribers.values()).find(
       (subscriber) => subscriber.email === email,
     );
+  }
+
+  async getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return Array.from(this.newsletterSubscribers.values()).sort((a, b) => {
+      return b.subscribedAt.getTime() - a.subscribedAt.getTime();
+    });
+  }
+
+  async getNewsletterSubscribersCount(): Promise<number> {
+    return this.newsletterSubscribers.size;
   }
 }
 

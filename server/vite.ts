@@ -40,8 +40,22 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+  // 使用条件中间件包装 Vite 中间件，排除 API 路由
+  app.use((req, res, next) => {
+    // 如果是 API 路由，直接跳过 Vite 中间件
+    if (req.originalUrl.startsWith("/api")) {
+      return next();
+    }
+    // 否则使用 Vite 中间件
+    vite.middlewares(req, res, next);
+  });
+
   app.use("*", async (req, res, next) => {
+    // 再次检查 API 路由（双重保险）
+    if (req.originalUrl.startsWith("/api")) {
+      return next();
+    }
+
     const url = req.originalUrl;
 
     try {

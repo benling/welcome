@@ -1,7 +1,7 @@
 # Design Guidelines: Personal Portfolio & Blog Website
 
 ## Design Approach
-**Reference-Based Design** inspired by ivanvolt.com with influences from modern minimalist portfolios (Stripe's clarity, Linear's typography, personal blogs like Leerob.io)
+**Reference-Based Design** inspired by ivanvolt.com with influences from modern minimalist portfolios
 
 **Core Principles:**
 - Minimalist restraint with purposeful whitespace

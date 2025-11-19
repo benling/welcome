@@ -51,6 +51,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // 获取订阅者数量
+  app.get("/api/newsletter/count", async (_req, res) => {
+    try {
+      const count = await storage.getNewsletterSubscribersCount();
+      res.json({ count });
+    } catch (error) {
+      console.error("Error fetching newsletter subscribers count:", error);
+      res.status(500).json({ error: "Failed to fetch subscribers count" });
+    }
+  });
+
+  // 获取所有订阅者列表
+  app.get("/api/newsletter/subscribers", async (_req, res) => {
+    try {
+      const subscribers = await storage.getAllNewsletterSubscribers();
+      res.json({ subscribers, count: subscribers.length });
+    } catch (error) {
+      console.error("Error fetching newsletter subscribers:", error);
+      res.status(500).json({ error: "Failed to fetch subscribers" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
